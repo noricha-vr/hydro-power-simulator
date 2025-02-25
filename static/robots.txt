@@ -1,0 +1,6 @@
+# マイクロ・小水力発電シミュレータのrobots.txt
+User-agent: *
+Allow: /
+
+# サイトマップの場所
+Sitemap: https://hydro-power-simulator.pages.dev/sitemap.xml 

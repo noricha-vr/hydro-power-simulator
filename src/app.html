@@ -1,10 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<link rel="stylesheet" href="%sveltekit.assets%/styles.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<!-- PWA対応 -->
+		<link rel="manifest" href="%sveltekit.assets%/manifest.json" />
+		<meta name="theme-color" content="#1a73e8" />
+		<link rel="apple-touch-icon" href="%sveltekit.assets%/icon-192.png" />
+		
+		<!-- キャッシュコントロール -->
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		
+		<!-- 検索エンジン向け -->
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href="%sveltekit.assets%/" />
+		
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

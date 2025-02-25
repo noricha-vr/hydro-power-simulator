@@ -1,0 +1,21 @@
+{
+  "name": "マイクロ・小水力発電シミュレータ",
+  "short_name": "水力発電計算",
+  "description": "マイクロ・小水力発電の発電量、経済性、環境影響を計算するシミュレータ",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a73e8",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+} 

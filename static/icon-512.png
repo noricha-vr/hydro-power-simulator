@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#1a73e8" rx="128" ry="128"/>
+  <g>
+    <!-- 水車のイラスト -->
+    <circle cx="256" cy="256" r="160" fill="#ffffff" opacity="0.2"/>
+    <circle cx="256" cy="256" r="140" fill="none" stroke="#ffffff" stroke-width="10"/>
+    <circle cx="256" cy="256" r="32" fill="#ffffff"/>
+    
+    <!-- 水車の羽根 -->
+    <path d="M256,116 L290,256 L256,256 Z" fill="#ffffff" transform="rotate(0 256 256)"/>
+    <path d="M256,116 L290,256 L256,256 Z" fill="#ffffff" transform="rotate(45 256 256)"/>
+    <path d="M256,116 L290,256 L256,256 Z" fill="#ffffff" transform="rotate(90 256 256)"/>
+    <path d="M256,116 L290,256 L256,256 Z" fill="#ffffff" transform="rotate(135 256 256)"/>
+    <path d="M256,116 L290,256 L256,256 Z" fill="#ffffff" transform="rotate(180 256 256)"/>
+    <path d="M256,116 L290,256 L256,256 Z" fill="#ffffff" transform="rotate(225 256 256)"/>
+    <path d="M256,116 L290,256 L256,256 Z" fill="#ffffff" transform="rotate(270 256 256)"/>
+    <path d="M256,116 L290,256 L256,256 Z" fill="#ffffff" transform="rotate(315 256 256)"/>
+    
+    <!-- 水の波紋 -->
+    <path d="M256,370 Q290,350 324,370 Q358,390 392,370" fill="none" stroke="#ffffff" stroke-width="8"/>
+    <path d="M256,400 Q290,380 324,400 Q358,420 392,400" fill="none" stroke="#ffffff" stroke-width="8"/>
+  </g>
+</svg> 
