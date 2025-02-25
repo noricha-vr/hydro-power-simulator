@@ -1,0 +1,5 @@
+name = "hydro-power-simulator"
+compatibility_date = "2023-01-01"
+
+# Pages configuration
+pages_build_output_dir = ".svelte-kit/cloudflare" 
