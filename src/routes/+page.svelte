@@ -21,9 +21,8 @@
 	let head = 10; // meters
 	let efficiency = 0.75; // 75%
 	
-	// 稼働時間の詳細設定
-	let hoursPerDay = 24; // 1日あたりの稼働時間
-	let daysPerMonth = 30; // 1ヶ月あたりの稼働日数
+	// 稼働時間の設定
+	let annualOperationRate = 95; // 年間稼働率 (%)
 	let operatingHours = 8760; // hours per year (calculated)
 	
 	let averageHomeConsumption = 3500; // kWh per year
@@ -42,8 +41,8 @@
 	// 水流量のリットル単位換算
 	$: flowRateLiters = flowRate * 1000; // m³/s to L/s
 
-	// 稼働時間の計算
-	$: operatingHours = hoursPerDay * daysPerMonth * 12;
+	// 稼働時間の計算 (年間稼働率から)
+	$: operatingHours = Math.round((annualOperationRate / 100) * 8760);
 
 	// Calculate results on load and when inputs change
 	$: {
@@ -71,12 +70,8 @@
 		head = Math.max(0, value);
 	}
 
-	function handleHoursPerDayChange(value: number) {
-		hoursPerDay = Math.min(24, Math.max(0, value));
-	}
-
-	function handleDaysPerMonthChange(value: number) {
-		daysPerMonth = Math.min(31, Math.max(0, value));
+	function handleOperationRateChange(value: number) {
+		annualOperationRate = Math.min(100, Math.max(0, value));
 	}
 
 	// Format number with commas and specified decimal places
@@ -117,7 +112,7 @@
 							min="0.001" 
 							max="5"
 							step="0.001"
-							on:input={(e) => handleFlowRateChange(parseFloat(e.target.value))}
+							on:input={(e) => handleFlowRateChange(parseFloat((e.target as HTMLInputElement).value))}
 						/>
 						<input 
 							type="number" 
@@ -126,7 +121,7 @@
 							min="0.001" 
 							max="30"
 							step="0.001"
-							on:input={(e) => handleFlowRateChange(parseFloat(e.target.value))}
+							on:input={(e) => handleFlowRateChange(parseFloat((e.target as HTMLInputElement).value))}
 						/>
 					</div>
 					<div class="value-range">
@@ -157,7 +152,7 @@
 							min="0.1" 
 							max="100"
 							step="0.1"
-							on:input={(e) => handleHeadChange(parseFloat(e.target.value))}
+							on:input={(e) => handleHeadChange(parseFloat((e.target as HTMLInputElement).value))}
 						/>
 						<input 
 							type="number" 
@@ -166,7 +161,7 @@
 							min="0.1" 
 							max="200"
 							step="0.1"
-							on:input={(e) => handleHeadChange(parseFloat(e.target.value))}
+							on:input={(e) => handleHeadChange(parseFloat((e.target as HTMLInputElement).value))}
 						/>
 					</div>
 					<div class="value-range">
@@ -188,60 +183,31 @@
 					<label for="operatingHours">稼働時間設定</label>
 					<div class="operating-time-settings">
 						<div class="time-setting">
-							<label for="hoursPerDay">1日あたりの稼働時間</label>
+							<label for="annualOperationRate">年間稼働率 (%)</label>
 							<div class="slider-with-input">
 								<input 
 									type="range" 
-									id="hoursPerDaySlider" 
-									bind:value={hoursPerDay} 
-									min="1" 
-									max="24" 
+									id="annualOperationRateSlider" 
+									bind:value={annualOperationRate} 
+									min="0" 
+									max="100"
 									step="1"
-									on:input={(e) => handleHoursPerDayChange(parseInt(e.target.value))}
+									on:input={(e) => handleOperationRateChange(parseInt((e.target as HTMLInputElement).value))}
 								/>
 								<input 
 									type="number" 
-									id="hoursPerDay" 
-									bind:value={hoursPerDay} 
-									min="1" 
-									max="24" 
+									id="annualOperationRate" 
+									bind:value={annualOperationRate} 
+									min="0" 
+									max="100"
 									step="1"
-									on:input={(e) => handleHoursPerDayChange(parseInt(e.target.value))}
+									on:input={(e) => handleOperationRateChange(parseInt((e.target as HTMLInputElement).value))}
 								/>
 							</div>
 							<div class="value-range">
-								<span>1</span>
-								<span class="current-value">{hoursPerDay}</span>
-								<span>24</span>
-							</div>
-						</div>
-						
-						<div class="time-setting">
-							<label for="daysPerMonth">1ヶ月あたりの稼働日数</label>
-							<div class="slider-with-input">
-								<input 
-									type="range" 
-									id="daysPerMonthSlider" 
-									bind:value={daysPerMonth} 
-									min="1" 
-									max="31" 
-									step="1"
-									on:input={(e) => handleDaysPerMonthChange(parseInt(e.target.value))}
-								/>
-								<input 
-									type="number" 
-									id="daysPerMonth" 
-									bind:value={daysPerMonth} 
-									min="1" 
-									max="31" 
-									step="1"
-									on:input={(e) => handleDaysPerMonthChange(parseInt(e.target.value))}
-								/>
-							</div>
-							<div class="value-range">
-								<span>1</span>
-								<span class="current-value">{daysPerMonth}</span>
-								<span>31</span>
+								<span>0%</span>
+								<span class="current-value">{annualOperationRate}%</span>
+								<span>100%</span>
 							</div>
 						</div>
 					</div>
@@ -250,7 +216,7 @@
 						<span class="current-value">{operatingHours}</span>
 						<span> 時間</span>
 					</div>
-					<div class="input-hint">最大: 8,760時間 (24時間 × 365日)</div>
+					<div class="input-hint">水力発電は連続運転が基本ですが、メンテナンスや水量不足などで稼働できない期間があります。<br>最大: 8,760時間 (24時間 × 365日 = 100%稼働)</div>
 				</div>
 			</div>
 
