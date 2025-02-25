@@ -1,7 +1,7 @@
 {
   "name": "マイクロ・小水力発電シミュレータ",
   "short_name": "水力発電計算",
-  "description": "マイクロ・小水力発電の発電量、経済性、環境影響を計算するシミュレータ",
+  "description": "水流量(L/秒)と落差(m)から発電出力、年間発電量、経済性、CO2削減量を計算できる無料シミュレータ",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
