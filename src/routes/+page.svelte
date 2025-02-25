@@ -105,8 +105,8 @@
 		<div class="parameter-grid">
 			<div class="parameter-card water-flow">
 				<div class="parameter-icon">
-					<svg viewBox="0 0 24 24" width="24" height="24">
-						<path fill="currentColor" d="M12,20C8.13,20 5,16.87 5,13C5,10.17 8.13,4 12,4C15.87,4 19,10.17 19,13C19,16.87 15.87,20 12,20M12,2C7.03,2 3,8.17 3,13C3,17.83 7.03,22 12,22C16.97,22 21,17.83 21,13C21,8.17 16.97,2 12,2Z" />
+					<svg viewBox="0 0 24 24" width="31" height="31">
+						<path fill="currentColor" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
 					</svg>
 				</div>
 				<div class="parameter-content">
