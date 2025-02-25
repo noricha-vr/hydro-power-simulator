@@ -43,6 +43,13 @@
 
 	// 稼働時間の計算 (年間稼働率から)
 	$: operatingHours = Math.round((annualOperationRate / 100) * 8760);
+	
+	// 異なる時間単位での発電量計算
+	$: powerOutputMinute = powerOutput * (1/60); // kWh in 1 minute
+	$: powerOutputHour = powerOutput; // kWh in 1 hour
+	$: powerOutputDay = powerOutput * 24; // kWh in 1 day
+	$: powerOutputWeek = powerOutput * 24 * 7; // kWh in 7 days
+	$: powerOutputMonth = powerOutput * 24 * 30; // kWh in 1 month (approx)
 
 	// Calculate results on load and when inputs change
 	$: {
@@ -308,26 +315,61 @@
 			<div class="classification-value">{hydroClass.name}</div>
 		</div>
 
-		<div class="result-item">
-			<p>発電出力: <span class="result-value">{formatNumber(powerOutput)} kW</span></p>
-		</div>
-		
-		<div class="result-item">
-			<p>水車効率: <span class="result-value">{formatNumber(actualEfficiency * 100, 1)}%</span></p>
-		</div>
-
-		<div class="result-item">
-			<p>年間発電量: <span class="result-value">{formatNumber(annualEnergy)} MWh</span></p>
-			<p>({formatNumber(annualEnergy * 1000)} kWh/年)</p>
-		</div>
-
-		<div class="result-item">
-			<p>一般家庭供給可能数: <span class="result-value">{formatNumber(homesPowered, 0)} 世帯</span></p>
-		</div>
-
-		<div class="result-item">
-			<p>二酸化炭素削減量: <span class="result-value">{formatNumber(annualEnergy * 0.5, 1)} トン/年</span></p>
-			<p class="small">※火力発電と比較した場合の概算値</p>
+		<div class="results-grid">
+			<div class="result-section power-section">
+				<h3>発電出力と発電量</h3>
+				
+				<div class="result-main-value">
+					<div class="main-value-label">発電出力:</div>
+					<div class="main-value">{formatNumber(powerOutput)} kW</div>
+				</div>
+				
+				<div class="result-sub-grid">
+					<div class="period-header">期間</div>
+					<div class="period-header">発電量</div>
+					
+					<div class="period-label">1分:</div>
+					<div class="period-value">{formatNumber(powerOutputMinute)} kWh</div>
+					
+					<div class="period-label">1時間:</div>
+					<div class="period-value">{formatNumber(powerOutputHour)} kWh</div>
+					
+					<div class="period-label">1日:</div>
+					<div class="period-value">{formatNumber(powerOutputDay)} kWh</div>
+					
+					<div class="period-label">7日:</div>
+					<div class="period-value">{formatNumber(powerOutputWeek)} kWh</div>
+					
+					<div class="period-label">1ヶ月:</div>
+					<div class="period-value">{formatNumber(powerOutputMonth)} kWh</div>
+				</div>
+				
+				<div class="result-main-value annual-energy">
+					<div class="main-value-label">年間発電量:</div>
+					<div class="main-value">{formatNumber(annualEnergy)} MWh</div>
+					<div class="main-value-sub">({formatNumber(annualEnergy * 1000)} kWh/年)</div>
+				</div>
+			</div>
+			
+			<div class="result-section efficiency-section">
+				<h3>効率と性能</h3>
+				
+				<div class="result-main-value">
+					<div class="main-value-label">水車効率:</div>
+					<div class="main-value">{formatNumber(actualEfficiency * 100, 1)}%</div>
+				</div>
+				
+				<div class="result-main-value">
+					<div class="main-value-label">一般家庭供給可能数:</div>
+					<div class="main-value">{formatNumber(homesPowered, 0)} 世帯</div>
+				</div>
+				
+				<div class="result-main-value">
+					<div class="main-value-label">二酸化炭素削減量:</div>
+					<div class="main-value">{formatNumber(annualEnergy * 0.5, 1)} トン/年</div>
+					<div class="sub-note">※火力発電と比較した場合の概算値</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -636,44 +678,145 @@
 		display: flex;
 		align-items: center;
 		background-color: #ebf5fb;
-		padding: 10px 15px;
-		border-radius: 6px;
-		margin-bottom: 20px;
+		padding: 12px 20px;
+		border-radius: 8px;
+		margin-bottom: 25px;
+		box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 	}
 	
 	.classification-label {
 		font-weight: 600;
 		margin-right: 10px;
 		color: #2c3e50;
+		font-size: 1.1rem;
 	}
 	
 	.classification-value {
-		font-size: 1.2rem;
+		font-size: 1.3rem;
 		font-weight: 700;
 		color: #3498db;
 	}
-
-	.result-item {
-		margin-bottom: 15px;
-		padding-bottom: 15px;
-		border-bottom: 1px solid #eee;
+	
+	.results-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 25px;
 	}
-
-	.result-item:last-child {
-		border-bottom: none;
-		margin-bottom: 0;
-		padding-bottom: 0;
+	
+	.result-section {
+		background-color: white;
+		border-radius: 10px;
+		padding: 20px;
+		box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 	}
-
-	.result-value {
-		font-weight: bold;
-		color: #2980b9;
+	
+	.result-section h3 {
+		margin-top: 0;
+		margin-bottom: 20px;
+		color: #2c3e50;
 		font-size: 1.2rem;
+		padding-bottom: 10px;
+		border-bottom: 2px solid #f1f1f1;
 	}
-
-	.small {
-		font-size: 0.8em;
+	
+	.power-section {
+		border-left: 5px solid #3498db;
+	}
+	
+	.efficiency-section {
+		border-left: 5px solid #2ecc71;
+	}
+	
+	.result-main-value {
+		display: flex;
+		align-items: baseline;
+		margin-bottom: 20px;
+		flex-wrap: wrap;
+	}
+	
+	.main-value-label {
+		font-weight: 500;
+		color: #555;
+		margin-right: 10px;
+		min-width: 120px;
+	}
+	
+	.main-value {
+		font-weight: 700;
+		color: #2980b9;
+		font-size: 1.4rem;
+	}
+	
+	.annual-energy {
+		margin-top: 25px;
+		padding-top: 15px;
+		border-top: 1px dashed #ddd;
+	}
+	
+	.main-value-sub {
+		color: #7f8c8d;
+		font-size: 0.9rem;
+		margin-left: 10px;
+	}
+	
+	.result-sub-grid {
+		display: grid;
+		grid-template-columns: 100px 1fr;
+		gap: 10px;
+		align-items: center;
+		background-color: #f8f9fa;
+		padding: 15px;
+		border-radius: 8px;
+		margin-top: 5px;
+	}
+	
+	.period-header {
+		font-weight: 600;
+		color: #555;
+		font-size: 0.9rem;
+		padding-bottom: 5px;
+		margin-bottom: 5px;
+		border-bottom: 1px solid #e0e0e0;
+	}
+	
+	.period-label {
 		color: #666;
+		font-size: 1rem;
+		text-align: right;
+		padding-right: 10px;
+	}
+	
+	.period-value {
+		font-weight: 600;
+		color: #2980b9;
+		font-size: 1.05rem;
+	}
+	
+	.sub-note {
+		font-size: 0.8rem;
+		color: #7f8c8d;
+		margin-top: 5px;
+		font-style: italic;
+	}
+	
+	@media (max-width: 768px) {
+		.results-grid {
+			grid-template-columns: 1fr;
+		}
+		
+		.result-main-value {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		
+		.main-value-label {
+			margin-bottom: 5px;
+		}
+		
+		.main-value-sub {
+			margin-left: 0;
+			margin-top: 5px;
+		}
 	}
 	
 	.tabs {
@@ -1193,5 +1336,36 @@
 		.time-setting {
 			width: 100%;
 		}
+	}
+	
+	.power-output-periods {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+		gap: 10px;
+		margin-top: 10px;
+		background-color: #f8f9fa;
+		padding: 10px;
+		border-radius: 6px;
+	}
+	
+	.period-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 8px;
+		background-color: white;
+		border-radius: 4px;
+		box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+	}
+	
+	.period-label {
+		font-size: 0.8rem;
+		color: #666;
+		margin-bottom: 4px;
+	}
+	
+	.period-value {
+		font-weight: 600;
+		color: #2980b9;
 	}
 </style>

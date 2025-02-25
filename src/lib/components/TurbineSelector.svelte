@@ -52,7 +52,20 @@
         on:click={() => selectedTurbineId = turbine.id}
       >
         <div class="turbine-header">
-          <h4>{turbine.name}</h4>
+          <h4>
+            {turbine.name}
+            <a 
+              href="https://www.google.com/search?q={encodeURIComponent(turbine.name)}&tbm=vid" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="video-link"
+              on:click|stopPropagation
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+              </svg>
+            </a>
+          </h4>
           {#if isSuitable(turbine)}
             <span class="suitability-badge suitable">適合</span>
           {:else}
@@ -76,7 +89,20 @@
   
   {#if selectedTurbine}
     <div class="selected-turbine-info">
-      <h4>選択中: {selectedTurbine.name}</h4>
+      <h4>
+        選択中: {selectedTurbine.name}
+        <a 
+          href="https://www.google.com/search?q={encodeURIComponent(selectedTurbine.name)}&tbm=vid" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="video-link"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path fill="currentColor" d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+          </svg>
+          <span>動画を検索</span>
+        </a>
+      </h4>
       <p>{selectedTurbine.description}</p>
     </div>
   {/if}
@@ -147,6 +173,22 @@
     margin: 0;
     font-size: 1rem;
     color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .video-link {
+    color: #3498db;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+  
+  .video-link:hover {
+    color: #2980b9;
+    transform: scale(1.2);
   }
   
   .suitability-badge {
@@ -205,6 +247,26 @@
   .selected-turbine-info h4 {
     margin: 0 0 10px 0;
     color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .selected-turbine-info .video-link {
+    font-size: 0.8rem;
+    background-color: #3498db;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+  }
+  
+  .selected-turbine-info .video-link:hover {
+    background-color: #2980b9;
+    transform: none;
   }
   
   .selected-turbine-info p {
