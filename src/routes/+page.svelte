@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { calculateHydroPower, calculateAnnualEnergy, estimateHomesPowered } from '$lib/hydroPower';
 	import { onMount } from 'svelte';
+	import PowerChart from '$lib/components/PowerChart.svelte';
+	import EfficiencyChart from '$lib/components/EfficiencyChart.svelte';
+	import AnnualEnergyChart from '$lib/components/AnnualEnergyChart.svelte';
+	import CO2ReductionChart from '$lib/components/CO2ReductionChart.svelte';
 
 	// Default values
 	let flowRate = 5; // m³/s
@@ -128,6 +132,30 @@
 	</div>
 
 	<div class="card">
+		<h2>データ可視化</h2>
+		
+		<div class="visualization-section">
+			<h3>発電出力の関係性</h3>
+			<PowerChart {flowRate} {head} {efficiency} />
+		</div>
+		
+		<div class="visualization-section">
+			<h3>効率と発電出力の関係</h3>
+			<EfficiencyChart {flowRate} {head} {efficiency} />
+		</div>
+		
+		<div class="visualization-section">
+			<h3>月間発電量予測</h3>
+			<AnnualEnergyChart powerOutput={powerOutput} operatingHours={operatingHours} />
+		</div>
+		
+		<div class="visualization-section">
+			<h3>環境への影響</h3>
+			<CO2ReductionChart annualEnergy={annualEnergy} />
+		</div>
+	</div>
+
+	<div class="card">
 		<h2>水力発電について</h2>
 		<p>水力発電は再生可能エネルギーのひとつで、水の流れを利用して電力を生み出します。水の位置エネルギーと運動エネルギーをタービンを通じて電気エネルギーに変換します。</p>
 		<p>主な要素:</p>
@@ -142,6 +170,72 @@
 </div>
 
 <style>
+	:global(body) {
+		background-color: #f5f7fa;
+		color: #333;
+		font-family: 'Helvetica Neue', Arial, sans-serif;
+		line-height: 1.6;
+		margin: 0;
+		padding: 0;
+	}
+
+	.container {
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 20px;
+	}
+
+	header {
+		text-align: center;
+		margin-bottom: 30px;
+	}
+
+	h1 {
+		color: #2c3e50;
+		font-size: 2.2rem;
+		margin-bottom: 10px;
+	}
+
+	h2 {
+		color: #2c3e50;
+		font-size: 1.5rem;
+		margin-bottom: 20px;
+		border-bottom: 2px solid #eee;
+		padding-bottom: 10px;
+	}
+
+	h3 {
+		color: #2c3e50;
+		font-size: 1.2rem;
+		margin-bottom: 15px;
+	}
+
+	.card {
+		background-color: white;
+		border-radius: 8px;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+		padding: 25px;
+		margin-bottom: 25px;
+	}
+
+	.form-group {
+		margin-bottom: 20px;
+	}
+
+	label {
+		display: block;
+		margin-bottom: 8px;
+		font-weight: 500;
+	}
+
+	input[type="number"] {
+		width: 100%;
+		padding: 10px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		font-size: 16px;
+	}
+
 	input[type="range"] {
 		-webkit-appearance: none;
 		appearance: none;
@@ -156,9 +250,31 @@
 		appearance: none;
 		width: 20px;
 		height: 20px;
-		background: var(--primary-color);
+		background: #3498db;
 		border-radius: 50%;
 		cursor: pointer;
+	}
+
+	.results {
+		background-color: #f8f9fa;
+	}
+
+	.result-item {
+		margin-bottom: 15px;
+		padding-bottom: 15px;
+		border-bottom: 1px solid #eee;
+	}
+
+	.result-item:last-child {
+		border-bottom: none;
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	.result-value {
+		font-weight: bold;
+		color: #2980b9;
+		font-size: 1.2rem;
 	}
 
 	.small {
@@ -173,5 +289,35 @@
 
 	li {
 		margin-bottom: 5px;
+	}
+
+	.visualization-section {
+		margin-bottom: 30px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid #eee;
+	}
+
+	.visualization-section:last-child {
+		border-bottom: none;
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 15px;
+		}
+		
+		.card {
+			padding: 20px;
+		}
+		
+		h1 {
+			font-size: 1.8rem;
+		}
+		
+		h2 {
+			font-size: 1.3rem;
+		}
 	}
 </style>
