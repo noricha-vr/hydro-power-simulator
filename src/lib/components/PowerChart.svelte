@@ -111,13 +111,13 @@
                 title: function(tooltipItems) {
                   const datasetIndex = tooltipItems[0].datasetIndex;
                   if (datasetIndex === 0) {
-                    return `水流量: ${tooltipItems[0].parsed.x.toFixed(2)} m³/s`;
+                    return `水流量: ${(tooltipItems[0].parsed.x ?? 0).toFixed(2)} m³/s`;
                   } else {
-                    return `有効落差: ${tooltipItems[0].parsed.x.toFixed(2)} m`;
+                    return `有効落差: ${(tooltipItems[0].parsed.x ?? 0).toFixed(2)} m`;
                   }
                 },
                 label: function(context) {
-                  return `発電出力: ${context.parsed.y.toFixed(2)} kW`;
+                  return `発電出力: ${(context.parsed.y ?? 0).toFixed(2)} kW`;
                 }
               }
             },

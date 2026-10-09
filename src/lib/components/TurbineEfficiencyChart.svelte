@@ -120,10 +120,10 @@
             tooltip: {
               callbacks: {
                 title: function(tooltipItems) {
-                  return `水流量: ${tooltipItems[0].parsed.x.toFixed(2)} m³/s`;
+                  return `水流量: ${(tooltipItems[0].parsed.x ?? 0).toFixed(2)} m³/s`;
                 },
                 label: function(context) {
-                  return `効率: ${context.parsed.y.toFixed(1)}%`;
+                  return `効率: ${(context.parsed.y ?? 0).toFixed(1)}%`;
                 }
               }
             },

@@ -83,7 +83,7 @@
             tooltip: {
               callbacks: {
                 label: function(context) {
-                  return `発電量: ${context.parsed.y.toFixed(2)} MWh`;
+                  return `発電量: ${(context.parsed.y ?? 0).toFixed(2)} MWh`;
                 }
               }
             },
