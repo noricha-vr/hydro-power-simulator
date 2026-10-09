@@ -109,10 +109,10 @@
             tooltip: {
               callbacks: {
                 title: function(tooltipItems) {
-                  return `効率: ${tooltipItems[0].parsed.x.toFixed(0)}%`;
+                  return `効率: ${(tooltipItems[0].parsed.x ?? 0).toFixed(0)}%`;
                 },
                 label: function(context) {
-                  return `発電出力: ${context.parsed.y.toFixed(2)} kW`;
+                  return `発電出力: ${(context.parsed.y ?? 0).toFixed(2)} kW`;
                 }
               }
             },

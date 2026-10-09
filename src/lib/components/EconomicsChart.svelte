@@ -128,7 +128,7 @@
                   return year === 0 ? '初期投資' : `${year}年目`;
                 },
                 label: function(context) {
-                  return `累積キャッシュフロー: ${context.parsed.y.toFixed(1)}百万円`;
+                  return `累積キャッシュフロー: ${(context.parsed.y ?? 0).toFixed(1)}百万円`;
                 }
               }
             },

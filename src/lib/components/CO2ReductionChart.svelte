@@ -105,7 +105,7 @@
             tooltip: {
               callbacks: {
                 label: function(context) {
-                  return `CO2排出量: ${context.parsed.y.toFixed(1)} トン/年`;
+                  return `CO2排出量: ${(context.parsed.y ?? 0).toFixed(1)} トン/年`;
                 }
               }
             },
