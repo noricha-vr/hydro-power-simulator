@@ -7,6 +7,7 @@
 ### Security
 
 - Vite 8.3.5、Wrangler 4.151.3 と関連する esbuild・sharp・undici・ws を更新しました。
+- SvelteKit が使う cookie を 0.7.2 に固定し、postcss-selector-parser を 6.1.4 に更新しました（Dependabot アラート対応）。
 
 ### Fixed
 
@@ -15,4 +16,5 @@
 
 ### Changed
 
+- どこからも import されていない svelte-chartjs を依存から外しました（チャートは chart.js を直接使用）。
 - ビルド環境は Node.js 22.12以上の22系、または24以上が必要です。

@@ -28,7 +28,11 @@
 	},
 	"dependencies": {
 		"chart.js": "^4.5.1",
-		"chartjs-plugin-annotation": "^3.1.0",
-		"svelte-chartjs": "^3.1.5"
+		"chartjs-plugin-annotation": "^3.1.0"
+	},
+	"overrides": {
+		"@sveltejs/kit": {
+			"cookie": "0.7.2"
+		}
 	}
 }
