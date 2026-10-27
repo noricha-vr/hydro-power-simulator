@@ -17,5 +17,6 @@
 
 ### Changed
 
+- 型チェックに TypeScript 7.0.2 を使用し、Svelte ツールの API 互換性のため TypeScript 6.0.3 を併用します。`npm run check` と `npm run check:watch` は `svelte-check --tsgo` で実行します。
 - どこからも import されていない svelte-chartjs を依存から外しました（チャートは chart.js を直接使用）。
 - ビルド環境は Node.js 22.12以上の22系、または24以上が必要です。
