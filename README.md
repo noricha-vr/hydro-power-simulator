@@ -50,6 +50,16 @@ npm run build
 
 ビルドされたファイルは `.svelte-kit/cloudflare` ディレクトリに生成されます。
 
+### 型チェック
+
+```bash
+npm run check
+# 変更を監視する場合
+npm run check:watch
+```
+
+型チェックは TypeScript 7.0.2（`@typescript/native` の npm alias）を `svelte-check --tsgo` から使用します。Svelte ツールが利用する JavaScript API のため、`typescript` には TypeScript 6.0.3 もインストールします。
+
 ## Cloudflareへのデプロイ
 
 ### 必要条件
