@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { Chart, registerables } from 'chart.js';
-  import { calculateEconomics } from '$lib/hydroPower';
+  import { calculateEconomics } from '#lib/hydroPower.ts';
   // @ts-ignore
   import annotationPlugin from 'chartjs-plugin-annotation';
 

@@ -6,15 +6,15 @@
 		getHydroClassification,
 		calculateTurbineEfficiency,
 		turbineTypes
-	} from '$lib/hydroPower';
+	} from '#lib/hydroPower.ts';
 	import { onMount } from 'svelte';
-	import PowerChart from '$lib/components/PowerChart.svelte';
-	import EfficiencyChart from '$lib/components/EfficiencyChart.svelte';
-	import AnnualEnergyChart from '$lib/components/AnnualEnergyChart.svelte';
-	import CO2ReductionChart from '$lib/components/CO2ReductionChart.svelte';
-	import TurbineEfficiencyChart from '$lib/components/TurbineEfficiencyChart.svelte';
-	import TurbineSelector from '$lib/components/TurbineSelector.svelte';
-	import EconomicsChart from '$lib/components/EconomicsChart.svelte';
+	import PowerChart from '#lib/components/PowerChart.svelte';
+	import EfficiencyChart from '#lib/components/EfficiencyChart.svelte';
+	import AnnualEnergyChart from '#lib/components/AnnualEnergyChart.svelte';
+	import CO2ReductionChart from '#lib/components/CO2ReductionChart.svelte';
+	import TurbineEfficiencyChart from '#lib/components/TurbineEfficiencyChart.svelte';
+	import TurbineSelector from '#lib/components/TurbineSelector.svelte';
+	import EconomicsChart from '#lib/components/EconomicsChart.svelte';
 
 	// Default values - adjusted for micro/small hydro
 	let flowRate = 0.5; // m³/s

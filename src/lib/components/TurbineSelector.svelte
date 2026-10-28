@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { turbineTypes, getSuitableTurbines } from '$lib/hydroPower';
+  import { turbineTypes, getSuitableTurbines } from '#lib/hydroPower.ts';
   
   // Props
   export let head: number;

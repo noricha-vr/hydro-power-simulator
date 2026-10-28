@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { Chart, registerables } from 'chart.js';
-  import { turbineTypes, calculateTurbineEfficiency } from '$lib/hydroPower';
+  import { turbineTypes, calculateTurbineEfficiency } from '#lib/hydroPower.ts';
 
   // Register all Chart.js components
   Chart.register(...registerables);
