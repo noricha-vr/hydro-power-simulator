@@ -20,7 +20,7 @@
 
 ### 必要条件
 
-- Node.js 22.12以上の22系、または24以上（CIは22系）
+- Node.js 22.17以上の22系、または24以上（CIは22系）
 - npm 8以上
 
 ### インストール
@@ -64,34 +64,42 @@ npm run check:watch
 
 ### 必要条件
 
-- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/)
-- Cloudflareアカウント
+- `npm ci --legacy-peer-deps` でインストールした、ロックファイルに固定された [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/)
+- 既存プロジェクト `hydro-power-simulator` に配信できる Cloudflare 認証
 
 ### デプロイ手順
 
-1. Wrangler CLIをインストール:
+1. 依存関係をインストール:
 
 ```bash
-npm install -g wrangler
+npm ci --legacy-peer-deps
 ```
 
-2. Cloudflareにログイン:
+2. まだ認証していない場合は、通常のターミナルで Cloudflare にログイン:
 
 ```bash
-wrangler login
+./node_modules/.bin/wrangler login
 ```
 
-3. アプリケーションをビルド:
+3. 配信対象の main の SHA を固定した clean な作業コピーで、型チェックとビルド:
 
 ```bash
+npm run check
 npm run build
 ```
 
-4. Cloudflare Pagesにデプロイ:
+4. GitHub の main とビルドしたコミットの一致を再確認し、既存の Cloudflare Pages プロジェクトに配信:
 
 ```bash
-wrangler pages deploy .svelte-kit/cloudflare
+RELEASE_SHA=$(git rev-parse HEAD)
+test "$(gh api repos/noricha-vr/hydro-power-simulator/commits/main --jq .sha)" = "$RELEASE_SHA" &&
+test -z "$(git status --porcelain)" &&
+CI=true ./node_modules/.bin/wrangler pages deploy .svelte-kit/cloudflare \
+  --project-name hydro-power-simulator --branch main \
+  --commit-hash "$RELEASE_SHA" --commit-dirty=false
 ```
+
+Git 連携による自動配信はありません。配信後は [本番サイト](https://hydro-power-simulator.kojin.works/) と [Pages URL](https://hydro-power-simulator.pages.dev/) で表示・再計算・グラフを確認します。SHA の固定、配信履歴の記録、監視、復旧の詳しい手順は [AGENTS.md](AGENTS.md) を参照してください。
 
 ## 計算式について
 
