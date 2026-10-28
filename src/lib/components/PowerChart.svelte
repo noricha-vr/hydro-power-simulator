@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, afterUpdate } from 'svelte';
   import { Chart, registerables } from 'chart.js';
-  import { calculateHydroPower } from '$lib/hydroPower';
+  import { calculateHydroPower } from '#lib/hydroPower.ts';
 
   // Register all Chart.js components
   Chart.register(...registerables);

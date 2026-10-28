@@ -4,7 +4,13 @@
 
 ## [Unreleased]
 
+### Changed
+
+- SvelteKit を 3.1.0、Cloudflare アダプターを 8.0.1 に更新しました。設定を `svelte.config.js` から `vite.config.ts` の `sveltekit(...)` に移し、`$lib` を `#lib`、`$app/stores` を `$app/state` に置き換えました（画面の見た目と動作は変わりません）。
+
 ### Security
+
+- SvelteKit 3 への更新で、cookie の固定（0.7.2）を外しました（SvelteKit 3 は cookie 2 系を必要とするため。SvelteKit の Dependabot アラート 2 件も解消します）。
 
 - 開発用ツール（miniflare）が固定している undici を override で 7.30.1 に上げました（Dependabot アラート対応。配信物には含まれません）。
 - Vite 8.3.5、Wrangler 4.151.3 と関連する esbuild・sharp・undici・ws を更新しました。
