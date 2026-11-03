@@ -6,6 +6,8 @@
 
 ### Changed
 
+- Tailwind CSS を 4.3.3 に更新し、PostCSS プラグインと CSS の読み込みを v4 の形式に変更しました。対応ブラウザは Safari 16.4 以上、Chrome 111 以上、Firefox 128 以上です。
+
 - SvelteKit を 3.1.0、Cloudflare アダプターを 8.0.1 に更新しました。設定を `svelte.config.js` から `vite.config.ts` の `sveltekit(...)` に移し、`$lib` を `#lib`、`$app/stores` を `$app/state` に置き換えました（画面の見た目と動作は変わりません）。
 
 ### Security

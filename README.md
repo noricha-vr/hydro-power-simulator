@@ -14,7 +14,10 @@
 
 - [SvelteKit](https://kit.svelte.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS 4](https://tailwindcss.com/)（PostCSS プラグインで処理。`src/app.css` から読み込み、クラスは自動検出）
 - [Cloudflare Pages](https://pages.cloudflare.com/)
+
+対応ブラウザは Tailwind CSS 4 の要件に従い、Safari 16.4 以上、Chrome 111 以上、Firefox 128 以上です。
 
 ## セットアップと実行方法
 
